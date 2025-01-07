@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <title>Clicksy</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+
+  <!-- Popup per email se non inserita -->
+  <% if (!user.email) { %>
+    <div id="emailPopup" class="popup-overlay">
+      <div class="popup-content">
+        <h2>Inserisci la tua email</h2>
+        <p>Necessaria per la distribuzione del premio in caso di vincita</p>
+        <input type="email" id="emailInput" placeholder="Inserisci la tua email" />
+        <button id="saveEmailBtn">Salva email</button>
+      </div>
+    </div>
+  <% } %>
+
+  <!-- Sezione per modificare email (sempre disponibile) -->
+  <div class="email-section">
+    <label>La tua email: <%= user.email %></label>
+    <button id="changeEmailBtn">Modifica email</button>
+  </div>
+
+  <!-- Timer e pulsante -->
+  <div class="button-section">
+    <button id="mainButton" <%= canClick ? "" : "disabled" %>>
+      Ritira 100€
+    </button>
+    <div id="timer" style="display:<%= canClick ? 'none' : 'block' %>">
+      <!-- Se non si può cliccare, mostra tempo rimanente -->
+      Tempo rimanente: <span id="remainingTime"><%= remainingTime %></span> secondi
+    </div>
+  </div>
+
+  <!-- Sezione ref link personale -->
+  <div class="ref-section">
+    <p>Il tuo ref link personale:</p>
+    <input type="text" value="<%= req.protocol %>://<%= req.get('host') %>/?ref=<%= user.user_hash %>" readonly />
+  </div>
+
+  <!-- Vetrina vincite fittizie -->
+  <div class="fake-winners">
+    <h3>Vincite Recenti</h3>
+    <div id="fakeWinnersList">
+      <% winnersToShow.forEach((winner) => { %>
+        <div class="winner-item">
+          <strong><%= winner.name %></strong> ha vinto <%= winner.amount %>€ alle <%= winner.time %>
+        </div>
+      <% }) %>
+    </div>
+  </div>
+
+  <script src="/js/script.js"></script>
+</body>
+</html>

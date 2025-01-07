@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <h1>Admin Dashboard</h1>
+
+  <form action="/admin/save-settings" method="POST">
+    <div>
+      <label>Testo del Pulsante:</label>
+      <input type="text" name="buttonText" value="<%= settings.button_text %>" />
+    </div>
+    <div>
+      <label>Colore del Pulsante:</label>
+      <input type="color" name="buttonColor" value="<%= settings.button_color %>" />
+    </div>
+    <div>
+      <label>Colore sfondo:</label>
+      <input type="color" name="backgroundColor" value="<%= settings.background_color %>" />
+    </div>
+    <div>
+      <label>Immagine sfondo (URL):</label>
+      <input type="text" name="backgroundImage" value="<%= settings.background_image %>"/>
+    </div>
+    <div>
+      <label>Sezioni extra (HTML o testo):</label><br>
+      <textarea name="extraSections" rows="5" cols="50"><%= settings.extra_sections %></textarea>
+    </div>
+    <button type="submit">Salva Impostazioni</button>
+  </form>
+
+  <h2>Genera Ref Link personalizzato</h2>
+  <form action="/admin/generate-ref" method="POST">
+    <input type="text" name="email" placeholder="Email utente" />
+    <button type="submit">Genera Link</button>
+  </form>
+
+  <h2>Classifica Referral</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Email</th>
+        <th>Referral Count</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% leaderboard.forEach(item => { %>
+        <tr>
+          <td><%= item.email %></td>
+          <td><%= item.referral_count %></td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</body>
+</html>
