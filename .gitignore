@@ -1,0 +1,23 @@
+# Dipendenze e cartelle generate da Node
+node_modules/
+
+# File di ambiente
+.env
+
+# Log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.log
+
+# File di lock (facoltativo, dipende dalle tue preferenze)
+package-lock.json
+yarn.lock
+
+# Cartelle di build o output
+dist/
+build/
+
+# Altri file o cartelle temporanei
+.DS_Store
+coverage/
