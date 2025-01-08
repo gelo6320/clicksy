@@ -23,8 +23,10 @@ app.use(cookieParser(process.env.SECRET_KEY));
 app.use('/', indexRoutes);
 app.use('/admin', adminRoutes);
 
-// Avvio server
+// Usa la porta assegnata da Railway o, in locale, 3000 come fallback
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
+
+// Avvio server
+app.listen(PORT, '0.0.0.0', () => {
   console.log(`Server avviato su http://localhost:${PORT}`);
 });
